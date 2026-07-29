@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading — A0 | Learning Bridge</title>
+<link rel="stylesheet" href="../../style.css">
+<script>
+  document.documentElement.setAttribute('data-theme', localStorage.getItem('lb-theme') === 'light' ? 'light' : 'dark');
+</script>
+<style>
+  .skill-hero{ padding:150px 24px 40px; text-align:center; background:radial-gradient(900px 450px at 50% -10%, rgba(59,130,246,0.14), transparent 60%), var(--bg); }
+  .skill-tag{ display:inline-flex; align-items:center; gap:8px; background:rgba(59,130,246,0.14); border:1px solid rgba(59,130,246,0.4); color:var(--blue-2); padding:6px 16px; border-radius:999px; font-size:.85rem; font-weight:700; margin-bottom:16px; }
+  .skill-hero h1{ font-size:clamp(1.6rem,4vw,2.2rem); font-weight:900; color:var(--ink); }
+  .skill-hero p{ margin-top:10px; color:var(--ink-soft); max-width:560px; margin-inline:auto; }
+
+  .lesson-wrap{ max-width:760px; margin:0 auto; padding:0 24px 130px; }
+  .unit{ margin-top:64px; padding-top:44px; border-top:1px solid var(--line); }
+  .unit:first-child{ margin-top:40px; padding-top:0; border-top:none; }
+  .unit-num{ display:inline-block; font-size:.8rem; font-weight:800; color:var(--gold); letter-spacing:.06em; margin-bottom:8px; }
+  .unit h2{ font-size:1.35rem; color:var(--ink); font-weight:900; margin-bottom:14px; }
+  .unit .intro{ color:var(--ink-soft); margin-bottom:22px; line-height:1.9; }
+
+  /* Signs — the reading material itself */
+  .sign-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:14px; margin:20px 0 28px; }
+  .sign{
+    background:#fff; color:#111; border-radius:10px; padding:18px 10px;
+    text-align:center; font-weight:900; font-size:1.05rem; letter-spacing:.04em;
+    border:4px solid var(--line);
+  }
+  .sign.red{ border-color:#ef4444; color:#ef4444; }
+  .sign.green{ border-color:#22c55e; color:#16a34a; }
+
+  .exercise-card{ background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:22px 20px; margin-top:16px; }
+  .exercise-card .q{ font-weight:700; color:var(--ink); margin-bottom:14px; }
+  .options{ display:grid; gap:10px; }
+  .opt-btn{ text-align:right; padding:12px 16px; border-radius:10px; border:1px solid var(--line); background:var(--bg); color:var(--ink); font-family:inherit; font-size:.95rem; cursor:pointer; transition:border-color .2s ease, background .2s ease; }
+  .opt-btn:hover{ border-color:var(--blue); }
+  .opt-btn.correct{ border-color:#22c55e; background:rgba(34,197,94,0.14); color:#4ade80; }
+  .opt-btn.wrong{ border-color:#ef4444; background:rgba(239,68,68,0.14); color:#f87171; }
+  .opt-btn:disabled{ cursor:default; }
+  .feedback{ margin-top:12px; font-size:.88rem; font-weight:700; min-height:1.2em; }
+  .feedback.ok{ color:#4ade80; }
+  .feedback.bad{ color:#f87171; }
+
+  .progress-bar{ position:sticky; top:68px; z-index:40; height:4px; background:var(--line); }
+  .progress-fill{ height:100%; background:linear-gradient(90deg,var(--blue),var(--gold)); width:0%; transition:width .4s ease; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <a href="../../index.html" class="brand"><span class="dot"></span> Learning Bridge</a>
+    <div class="nav-right">
+      <button class="theme-toggle" data-theme-toggle aria-label="تبديل الوضع الداكن/الفاتح">🌙</button>
+      <a href="index.html" class="nav-cta latin">A0 Skills</a>
+    </div>
+  </div>
+</nav>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<section class="skill-hero">
+  <span class="skill-tag latin reveal">Reading · A0</span>
+  <h1 class="reveal">القراءة — كلمات ولافتات بسيطة</h1>
+  <p class="reveal">بهالمستوى بتقرأ كلمات منفصلة ولافتات بسيطة، مش جمل كاملة بعد — وهذا طبيعي تمامًا.</p>
+</section>
+
+<div class="lesson-wrap">
+
+  <!-- ===================== UNIT 1 — Signs ===================== -->
+  <div class="unit" id="u1">
+    <span class="unit-num latin">UNIT 1</span>
+    <h2>لافتات بسيطة — Simple Signs</h2>
+    <p class="intro">هاي لافتات بتشوفها كل يوم بالشارع أو بالمحلات. اقرأها منيح قبل ما تجاوب.</p>
+
+    <div class="sign-grid">
+      <div class="sign red latin">STOP</div>
+      <div class="sign green latin">OPEN</div>
+      <div class="sign red latin">CLOSED</div>
+      <div class="sign latin">EXIT</div>
+      <div class="sign latin">PUSH</div>
+      <div class="sign latin">PULL</div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="q">1) شو معنى لافتة <span class="latin">"STOP"</span>؟</div>
+      <div class="options" data-answer="1">
+        <button class="opt-btn">ادفع</button>
+        <button class="opt-btn">قف</button>
+        <button class="opt-btn">مفتوح</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="q">2) شو اللافتة يلي بتخبرك إنو المحل مسكر؟</div>
+      <div class="options" data-answer="2">
+        <button class="opt-btn latin">OPEN</button>
+        <button class="opt-btn latin">EXIT</button>
+        <button class="opt-btn latin">CLOSED</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+  </div>
+
+  <!-- ===================== UNIT 2 — Words & pictures ===================== -->
+  <div class="unit" id="u2">
+    <span class="unit-num latin">UNIT 2</span>
+    <h2>كلمات وصور — Words &amp; Pictures</h2>
+    <p class="intro">اقرأ الكلمة واختار الصورة الصح إلها.</p>
+
+    <div class="exercise-card">
+      <div class="q">1) <span class="latin">"Apple"</span> — شو الصورة الصح؟</div>
+      <div class="options" data-answer="0">
+        <button class="opt-btn">🍎</button>
+        <button class="opt-btn">🍌</button>
+        <button class="opt-btn">🐶</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="q">2) <span class="latin">"Sun"</span> — شو الصورة الصح؟</div>
+      <div class="options" data-answer="2">
+        <button class="opt-btn">🌙</button>
+        <button class="opt-btn">⭐</button>
+        <button class="opt-btn">☀️</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="q">3) <span class="latin">"Car"</span> — شو الصورة الصح؟</div>
+      <div class="options" data-answer="1">
+        <button class="opt-btn">✈️</button>
+        <button class="opt-btn">🚗</button>
+        <button class="opt-btn">🚲</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="../../script.js"></script>
+<script>
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  const actx = AudioCtx ? new AudioCtx() : null;
+  function playTone(freq, duration, type = 'sine', gainPeak = 0.15) {
+    if (!actx) return;
+    if (actx.state === 'suspended') actx.resume();
+    const osc = actx.createOscillator();
+    const gain = actx.createGain();
+    osc.type = type; osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0, actx.currentTime);
+    gain.gain.linearRampToValueAtTime(gainPeak, actx.currentTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + duration);
+    osc.connect(gain).connect(actx.destination);
+    osc.start(); osc.stop(actx.currentTime + duration);
+  }
+  function playClick(){ playTone(500, 0.08, 'square', 0.06); }
+  function playCorrect(){ playTone(660, 0.14, 'sine', 0.14); setTimeout(() => playTone(880, 0.18, 'sine', 0.14), 100); }
+  function playWrong(){ playTone(160, 0.28, 'sawtooth', 0.12); }
+
+  document.querySelectorAll('.exercise-card .options').forEach(group => {
+    const correctIdx = Number(group.dataset.answer);
+    const buttons = [...group.querySelectorAll('.opt-btn')];
+    const feedback = group.parentElement.querySelector('.feedback');
+    buttons.forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        playClick();
+        buttons.forEach(b => b.disabled = true);
+        if (i === correctIdx) {
+          btn.classList.add('correct');
+          feedback.textContent = 'صحيح! أحسنت 🎉';
+          feedback.className = 'feedback ok';
+          playCorrect();
+        } else {
+          btn.classList.add('wrong');
+          buttons[correctIdx].classList.add('correct');
+          feedback.textContent = 'مش صحيح، الإجابة الصح متعلمة فوق باللون الأخضر.';
+          feedback.className = 'feedback bad';
+          playWrong();
+        }
+      });
+    });
+  });
+
+  const fill = document.getElementById('progressFill');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    fill.style.width = scrolled + '%';
+  });
+</script>
+</body>
+</html>
