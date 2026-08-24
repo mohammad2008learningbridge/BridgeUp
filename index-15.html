@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BridgeUp — Levels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f2ed; --card:#fffdf9; --text:#26272a; --muted:#77787a;
+  --accent:#607b70; --accent2:#9bb1a5; --line:#e4e1da;
+  --glass:rgba(255,255,255,.74); --shadow:0 14px 35px rgba(38,39,42,.12);
+}
+body.dark{
+  --bg:#20242a; --card:#292e35; --text:#f5f3ee; --muted:#b7bbc0;
+  --accent:#9db8ab; --accent2:#647a70; --line:#3b4149;
+  --glass:rgba(35,40,47,.76); --shadow:0 16px 40px rgba(0,0,0,.32);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Noto Naskh Arabic",serif;transition:.25s}
+button{font:inherit;color:inherit;border:0;cursor:pointer}
+.page{width:min(1100px,100%);margin:auto;padding:18px 18px 118px}
+
+/* top */
+.topbar{height:58px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;direction:ltr}
+.back-btn{justify-self:start;background:transparent;width:48px;height:48px;display:grid;place-items:center;font-family:Arial,sans-serif;font-size:30px;font-weight:300}
+.brand{justify-self:center;font:700 28px Georgia,serif;letter-spacing:.2px;direction:ltr}
+.brand-mark{justify-self:end;width:44px;height:44px;display:grid;place-items:center}
+.mark{
+  position:relative;width:34px;height:34px;border-radius:50%;
+  border:3px solid var(--text);display:block;
+}
+.mark:before{
+  content:"B";position:absolute;left:7px;top:-5px;
+  font:700 29px Georgia,serif;line-height:1;color:var(--text);
+}
+.mark:after{
+  content:"";position:absolute;width:12px;height:3px;background:var(--accent);
+  right:-5px;bottom:5px;transform:rotate(-28deg);border-radius:3px;
+}
+
+/* theme toggle */
+.theme-toggle{
+  position:fixed;top:24px;right:22px;z-index:60;
+  width:82px;height:38px;border-radius:22px;padding:4px;
+  background:var(--glass);border:1px solid var(--line);box-shadow:0 7px 20px rgba(0,0,0,.10);
+  display:flex;align-items:center;justify-content:space-between;direction:ltr;
+}
+.theme-toggle .sun,.theme-toggle .moon{
+  width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:Arial,sans-serif;font-size:17px;
+}
+.theme-toggle .sun{background:rgba(255,255,255,.8);color:#333}
+.theme-toggle .moon{color:var(--muted)}
+body.dark .theme-toggle .sun{background:transparent;color:var(--muted)}
+body.dark .theme-toggle .moon{background:#3b424b;color:#fff}
+
+/* title */
+.heading{text-align:center;margin:12px 0 26px}
+.heading h1{margin:0;font-size:39px;line-height:1.2;font-weight:700}
+.heading p{margin:5px 0 0;color:var(--muted);font-size:17px}
+
+/* levels */
+.level-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:930px;margin:auto}
+.level-card{
+  position:relative;min-height:270px;padding:0 14px 18px;
+  border-radius:24px;background:var(--card);border:1px solid var(--line);
+  box-shadow:var(--shadow);text-align:center;overflow:hidden;
+  transition:transform .22s,box-shadow .22s,border-color .22s;
+}
+.level-card:hover{transform:translateY(-5px)}
+.level-card.current{border-color:var(--accent);box-shadow:0 16px 42px rgba(96,123,112,.24)}
+.level-code{position:absolute;top:14px;right:17px;font:600 18px Georgia,serif;direction:ltr}
+.art{
+  width:170px;height:170px;margin:24px auto 10px;border-radius:50%;
+  background:radial-gradient(circle at 45% 35%,rgba(255,214,180,.85),rgba(233,208,194,.48) 55%,transparent 56%);
+  display:grid;place-items:center;overflow:hidden;
+}
+.art img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.art-placeholder{font-size:14px;color:var(--muted)}
+.level-name{font-size:22px;font-weight:700;direction:ltr}
+.level-sub{font-family:Georgia,serif;font-size:13px;color:var(--muted);direction:ltr}
+
+/* bottom nav */
+.bottom-nav{
+  position:fixed;z-index:50;left:50%;bottom:14px;transform:translateX(-50%);
+  width:min(650px,calc(100% - 28px));height:66px;padding:8px 15px;
+  display:grid;grid-template-columns:repeat(6,1fr);align-items:center;
+  direction:ltr;border:1px solid var(--line);border-radius:27px;
+  background:var(--glass);backdrop-filter:blur(18px);box-shadow:var(--shadow);
+}
+.nav-btn{height:48px;border-radius:17px;background:transparent;display:grid;place-items:center;font-family:Arial,sans-serif;font-size:22px;color:var(--muted);transition:.2s}
+.nav-btn.active{color:var(--accent);background:rgba(96,123,112,.10)}
+.nav-btn:hover{transform:translateY(-2px);color:var(--text)}
+.nav-icon{width:23px;height:23px;display:block;position:relative}
+.i-home:before{content:"";position:absolute;left:3px;top:9px;width:17px;height:12px;border:2px solid currentColor;border-top:0;border-radius:2px}
+.i-home:after{content:"";position:absolute;left:4px;top:3px;width:14px;height:14px;border-left:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg)}
+.i-head:before{content:"";position:absolute;left:2px;top:2px;width:19px;height:17px;border:2px solid currentColor;border-bottom:0;border-radius:13px 13px 0 0}
+.i-head:after{content:"";position:absolute;left:1px;top:12px;width:6px;height:9px;border:2px solid currentColor;border-radius:5px;box-shadow:15px 0 0 -2px var(--glass),15px 0 0 0 currentColor}
+.i-chat:before{content:"";position:absolute;left:2px;top:3px;width:18px;height:14px;border:2px solid currentColor;border-radius:8px}
+.i-chat:after{content:"";position:absolute;left:5px;bottom:2px;width:7px;height:7px;border-left:2px solid currentColor;transform:skew(-25deg)}
+.i-plane:before{content:"➤";position:absolute;font-size:26px;left:0;top:-5px;transform:rotate(-28deg)}
+.i-book:before{content:"";position:absolute;left:2px;top:2px;width:18px;height:19px;border:2px solid currentColor;border-radius:3px}
+.i-book:after{content:"";position:absolute;left:10px;top:3px;height:17px;border-left:2px solid currentColor}
+.i-gear:before{content:"⚙";position:absolute;font-size:25px;left:-1px;top:-5px}
+
+/* mobile */
+@media(max-width:760px){
+  .page{padding:12px 13px 105px}
+  .topbar{height:55px}
+  .brand{font-size:25px}
+  .theme-toggle{top:18px;right:14px;transform:scale(.9);transform-origin:right top}
+  .back-btn{font-size:28px}
+  .heading{margin-top:15px;margin-bottom:21px}
+  .heading h1{font-size:32px}
+  .heading p{font-size:15px}
+  .level-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .level-card{min-height:235px;border-radius:21px;padding-bottom:14px}
+  .art{width:135px;height:135px;margin-top:22px}
+  .level-name{font-size:19px}
+  .level-code{font-size:16px}
+}
+@media(max-width:430px){
+  .level-grid{gap:10px}
+  .level-card{min-height:220px}
+  .art{width:120px;height:120px}
+  .level-name{font-size:18px}
+  .bottom-nav{height:62px;border-radius:24px;padding:7px 8px}
+}
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع">
+  <span class="sun">☀</span><span class="moon">☾</span>
+</button>
+
+<div class="page">
+  <header class="topbar">
+    <button class="back-btn" id="backBtn" aria-label="رجوع">←</button>
+    <div class="brand">BridgeUp</div>
+    <div class="brand-mark"><span class="mark" aria-hidden="true"></span></div>
+  </header>
+
+  <section class="heading">
+    <h1>اختر مستواك</h1>
+    <p>ابدأ من مكانك وتقدّم خطوةً بعد خطوة.</p>
+  </section>
+
+  <main class="level-grid">
+    <!-- استبدل src لاحقًا بالصور الموجودة داخل مجلد images -->
+    <button class="level-card" data-level="A0">
+      <span class="level-code">A0</span>
+      <div class="art"><img src="images/A0.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="art-placeholder">صورة A0</span></div>
+      <div class="level-name">A0</div><div class="level-sub">Starter</div>
+    </button>
+
+    <button class="level-card" data-level="A1">
+      <span class="level-code">A1</span>
+      <div class="art"><img src="images/A1.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="art-placeholder">صورة A1</span></div>
+      <div class="level-name">A1</div><div class="level-sub">Beginner</div>
+    </button>
+
+    <button class="level-card current" data-level="A2">
+      <span class="level-code">A2</span>
+      <div class="art"><img src="images/A2.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="art-placeholder">صورة A2</span></div>
+      <div class="level-name">A2</div><div class="level-sub">Elementary</div>
+    </button>
+
+    <button class="level-card" data-level="B1">
+      <span class="level-code">B1</span>
+      <div class="art"><img src="images/B1.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="art-placeholder">صورة B1</span></div>
+      <div class="level-name">B1</div><div class="level-sub">Intermediate</div>
+    </button>
+
+    <button class="level-card" data-level="B2">
+      <span class="level-code">B2</span>
+      <div class="art"><img src="images/B2.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="art-placeholder">صورة B2</span></div>
+      <div class="level-name">B2</div><div class="level-sub">Upper-Intermediate</div>
+    </button>
+
+    <button class="level-card" data-level="C1">
+      <span class="level-code">C1</span>
+      <div class="art"><img src="images/C1.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="art-placeholder">صورة C1</span></div>
+      <div class="level-name">C1</div><div class="level-sub">Advanced</div>
+    </button>
+
+    <button class="level-card" data-level="C2">
+      <span class="level-code">C2</span>
+      <div class="art"><img src="images/C2.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="art-placeholder">صورة C2</span></div>
+      <div class="level-name">C2</div><div class="level-sub">Mastery</div>
+    </button>
+  </main>
+</div>
+
+<nav class="bottom-nav" aria-label="التنقل">
+  <button class="nav-btn active" aria-label="الرئيسية"><span class="nav-icon i-home"></span></button>
+  <button class="nav-btn" aria-label="الاستماع"><span class="nav-icon i-head"></span></button>
+  <button class="nav-btn" aria-label="المحادثة"><span class="nav-icon i-chat"></span></button>
+  <button class="nav-btn" aria-label="التمارين"><span class="nav-icon i-plane"></span></button>
+  <button class="nav-btn" aria-label="المحتوى"><span class="nav-icon i-book"></span></button>
+  <button class="nav-btn" aria-label="الإعدادات"><span class="nav-icon i-gear"></span></button>
+</nav>
+
+<script>
+let audioCtx;
+function clickSound(){
+  try{
+    audioCtx ??= new (window.AudioContext||window.webkitAudioContext)();
+    const o=audioCtx.createOscillator(), g=audioCtx.createGain();
+    o.frequency.value=520;
+    g.gain.setValueAtTime(.018,audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+.07);
+    o.connect(g).connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime+.07);
+  }catch(e){}
+}
+document.getElementById('themeToggle').onclick=()=>{
+  document.body.classList.toggle('dark'); clickSound();
+};
+document.getElementById('backBtn').onclick=()=>{clickSound();history.back()};
+document.querySelectorAll('.level-card').forEach(card=>{
+  card.onclick=()=>{clickSound();history.pushState({level:card.dataset.level},'', '#level-'+card.dataset.level)};
+});
+document.querySelectorAll('.nav-btn').forEach(btn=>btn.onclick=()=>{clickSound()});
+</script>
+</body>
+</html>
